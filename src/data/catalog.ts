@@ -1,14 +1,27 @@
 import type { Collection, Product, Review } from '../types/shop';
 
-const COLOR_MAP: Record<string, { name: string; label: string; hex: string }> = {
+const COLOR_MAP: Record<string, { name: string; label: string; hex: string; swatchImage?: string }> = {
   '1': { name: '1', label: '1 - Jet Black', hex: '#090909' },
   '1b': { name: '1b', label: '1b - Natural Black', hex: '#1b1817' },
   '2': { name: '2', label: '2 - Darkest Brown', hex: '#2c1f19' },
   '4': { name: '4', label: '4 - Medium Brown', hex: '#4b3326' },
   '6': { name: '6', label: '6 - Chestnut Brown', hex: '#6f4e37' },
   '10': { name: '10', label: '10 - Light Brown', hex: '#8b6948' },
+  '18A': { name: '18A', label: '#18A - Ash Blonde', hex: '#c7b08a', swatchImage: '/shades/18A.webp' },
+  '30': { name: '30', label: '#30 - Medium Auburn', hex: '#7a4128', swatchImage: '/shades/30-1.webp' },
+  '60': { name: '60', label: '#60 - Platinum Blonde', hex: '#efe8d6', swatchImage: '/shades/60.webp' },
+  '350': { name: '350', label: '#350 - Copper Auburn', hex: '#9e4725', swatchImage: '/shades/350.webp' },
   '613': { name: '613', label: '613 - Platinum Blonde', hex: '#e6d39c' },
+  '1001': { name: '1001', label: '#1001 - Light Ash Blonde', hex: '#e8dec8', swatchImage: '/shades/1001-1.webp' },
 };
+
+export const CUSTOM_SHADE_GALLERY = [
+  { code: '#18A', label: 'Ash Blonde (#18A)', images: ['/shades/18A.webp'] },
+  { code: '#30', label: 'Medium Auburn (#30)', images: ['/shades/30-1.webp', '/shades/30-2.webp', '/shades/30-3.jpg', '/shades/30-4.webp'] },
+  { code: '#60', label: 'Platinum Blonde (#60)', images: ['/shades/60.webp'] },
+  { code: '#350', label: 'Copper Auburn (#350)', images: ['/shades/350.webp', '/shades/350-1.webp', '/shades/350-2.webp', '/shades/350-3.jpg', '/shades/350-4.webp'] },
+  { code: '#1001', label: 'Light Ash Blonde (#1001)', images: ['/shades/1001-1.webp', '/shades/1001-2.webp', '/shades/1001-3.webp', '/shades/1001-4.webp'] },
+];
 
 function makeColors(keys: string[]) {
   return keys.map((k) => COLOR_MAP[k] || COLOR_MAP['1b']);
@@ -119,9 +132,9 @@ export const PRODUCTS: Product[] = [
       'https://laextensionsshop.com/cdn/shop/files/IMG_2172_800x.jpg?v=1686721061',
       'https://laextensionsshop.com/cdn/shop/products/1b_3a96ba47-34ed-4f85-b52d-fa07fe286830_800x.png?v=1686721061',
     ],
-    colors: makeColors(['1b', '2', '4', '613']),
+    colors: makeColors(['1b', '2', '4', '18A', '30', '60', '350', '613', '1001']),
     lengths: Object.keys(BUNDLE_PRICES),
-    variants: buildVariants('natural-wavy-hair-extensions', BUNDLE_PRICES, ['1b', '2', '4', '613'], { '4': 5, '613': 20 }),
+    variants: buildVariants('natural-wavy-hair-extensions', BUNDLE_PRICES, ['1b', '2', '4', '18A', '30', '60', '350', '613', '1001'], { '4': 5, '18A': 15, '30': 15, '60': 20, '350': 15, '613': 20, '1001': 20 }),
     rating: 5,
     reviewCount: 48,
   },
@@ -222,9 +235,9 @@ export const PRODUCTS: Product[] = [
       'https://laextensionsshop.com/cdn/shop/files/img_9629_800x.jpg?v=1687404740',
       'https://laextensionsshop.com/cdn/shop/products/1b_5f26fc74-6b9a-4373-96f1-5857eb8a467e_800x.png?v=1687404740',
     ],
-    colors: makeColors(['1b', '2', '4', '613']),
+    colors: makeColors(['1b', '2', '4', '18A', '30', '60', '350', '613', '1001']),
     lengths: Object.keys(BUNDLE_PRICES),
-    variants: buildVariants('hair-extensions-straight', BUNDLE_PRICES, ['1b', '2', '4', '613'], { '4': 5, '613': 20 }),
+    variants: buildVariants('hair-extensions-straight', BUNDLE_PRICES, ['1b', '2', '4', '18A', '30', '60', '350', '613', '1001'], { '4': 5, '18A': 15, '30': 15, '60': 20, '350': 15, '613': 20, '1001': 20 }),
     rating: 5,
     reviewCount: 41,
   },

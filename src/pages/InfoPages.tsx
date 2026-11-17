@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import { COLLECTIONS, FAQS, REVIEWS, SERVICES } from '../data/catalog';
+import { COLLECTIONS, CUSTOM_SHADE_GALLERY, FAQS, REVIEWS, SERVICES } from '../data/catalog';
 
 const SERVICES_HERO_IMG =
   'https://laextensionsshop.com/cdn/shop/files/blowdrying-hair-on-round-brush.jpg?v=1671557276&width=2400';
@@ -433,6 +433,25 @@ export function InstagramPage() {
             </Link>
           ))}
         </div>
+
+        <section style={{ marginTop: '64px', borderTop: '1px solid #ededed', paddingTop: '48px' }}>
+          <header style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2>Signature Hair Shades</h2>
+            <p style={{ color: '#555555' }}>Custom tones available across our virgin hair collections</p>
+          </header>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+            {CUSTOM_SHADE_GALLERY.map((shade) => (
+              <div key={shade.code} style={{ border: '1px solid #ededed', padding: '14px', textAlign: 'center' }}>
+                <img
+                  src={shade.images[0]}
+                  alt={shade.label}
+                  style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', marginBottom: '10px' }}
+                />
+                <div style={{ fontSize: '13px', fontWeight: 500 }}>{shade.label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

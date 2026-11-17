@@ -59,6 +59,11 @@ export function ProductPage() {
     });
   };
 
+  const activeColorObj = product.colors.find((c) => c.name === selectedColor);
+  const displayImages = activeColorObj?.swatchImage
+    ? [activeColorObj.swatchImage, ...product.images.filter((im) => im !== activeColorObj.swatchImage)]
+    : product.images;
+
   const related = products
     .filter((p) => p.collection === product.collection && p.id !== product.id)
     .slice(0, 4);
@@ -70,10 +75,10 @@ export function ProductPage() {
           {/* Left Column: Main Image + Square Thumbnails */}
           <div>
             <div className="product-gallery__main">
-              <img src={product.images[selectedImage] || product.images[0]} alt={product.title} />
+              <img src={displayImages[selectedImage] || displayImages[0]} alt={product.title} />
             </div>
             <div className="product-gallery__thumbs">
-              {product.images.map((img, idx) => (
+              {displayImages.map((img, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -179,7 +184,10 @@ export function ProductPage() {
                           display: 'block',
                           width: '100%',
                           height: '100%',
-                          background: `linear-gradient(135deg, ${c.hex} 0%, ${c.hex}dd 50%, ${c.hex} 100%)`,
+                          backgroundColor: c.hex,
+                          backgroundImage: c.swatchImage ? `url(${c.swatchImage})` : `linear-gradient(135deg, ${c.hex} 0%, ${c.hex}dd 50%, ${c.hex} 100%)`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                         }}
                       />
                     </button>
