@@ -183,68 +183,62 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 9. The Giordana Selection — Eén kleur, meerdere bevestigingsmethodes */}
-      <section className="index-section" style={{ borderTop: '1px solid #ededed' }}>
+      {/* 9. The Giordana Selection (Clean Motion Theme Row matching Screenshot 2) */}
+      <section className="index-section" style={{ paddingTop: '20px' }}>
         <div className="page-width">
           <div className="section-header">
-            <div>
-              <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#666666', marginBottom: '6px' }}>
-                {t.home.giordanaSelectionTitle}
-              </div>
-              <h2 className="section-header__title">{t.home.giordanaSelectionHeadline}</h2>
-            </div>
+            <h2 className="section-header__title">{t.home.giordanaSelectionTitle}</h2>
             <Link to="/pages/shades" className="section-header__link">
               {t.home.viewAll}
             </Link>
           </div>
 
-          <p style={{ maxWidth: '760px', fontSize: '14px', lineHeight: 1.8, color: '#333333', marginBottom: '20px' }}>
-            {t.home.giordanaSelectionIntro}
-          </p>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '22px' }}>
-            {[
-              { label: 'Tape-in Extensions', to: '/collections/tape-in-extensions' },
-              { label: 'Genius Weft', to: '/collections/hair-extension-bundles' },
-              { label: 'Machine Weft', to: '/collections/hair-extension-bundles' },
-              { label: 'Clip-in Extensions', to: '/collections/clip-in-extensions' },
-              { label: 'Keratin Extensions', to: '/collections/u-tip-extensions' },
-            ].map((m) => (
-              <Link
-                key={m.label}
-                to={m.to}
-                style={{
-                  border: '1px solid #000000',
-                  padding: '8px 16px',
-                  fontSize: '12px',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                {m.label}
-              </Link>
-            ))}
-          </div>
-
-          <p style={{ maxWidth: '820px', fontSize: '13px', lineHeight: 1.75, background: '#f7f7f7', padding: '14px 18px', borderLeft: '3px solid #000000', marginBottom: '28px' }}>
-            <strong>{t.home.giordanaSelectionImportantLabel}</strong> {t.home.giordanaSelectionImportantText}
-          </p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '20px' }}>
-            {CUSTOM_SHADE_GALLERY.map((shade) => (
-              <Link
-                key={shade.code}
-                to="/pages/shades"
-                style={{ border: '1px solid #ededed', padding: '12px', textAlign: 'center', display: 'block' }}
-              >
-                <img
-                  src={shade.images[0]}
-                  alt={shade.label}
-                  style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', marginBottom: '10px' }}
-                />
-                <div style={{ fontSize: '13px', fontWeight: 500 }}>{shade.label}</div>
-              </Link>
-            ))}
+          <div className="product-grid" style={{ gridTemplateColumns: 'repeat(5, minmax(0, 1fr))' }}>
+            {CUSTOM_SHADE_GALLERY.map((shade) => {
+              const hexMap: Record<string, string> = {
+                '#18A': '#c7b08a',
+                '#30': '#7a4128',
+                '#60': '#efe8d6',
+                '#350': '#9e4725',
+                '#1001': '#e8dec8',
+              };
+              return (
+                <div key={shade.code} className="grid-product__content">
+                  <Link
+                    to="/collections/hair-extension-bundles/products/natural-wavy-hair-extensions"
+                    className="grid-product__link"
+                  >
+                    <div className="grid-product__image-mask" style={{ backgroundColor: '#ffffff' }}>
+                      <img
+                        src={shade.images[0]}
+                        alt={shade.label}
+                        loading="lazy"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                    <div className="grid-product__meta">
+                      <div className="grid-product__title">{shade.label}</div>
+                      <div className="grid-product__price">
+                        <span>{t.product.from} $140</span>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className="grid-product__colors">
+                    <Link
+                      to="/collections/hair-extension-bundles/products/natural-wavy-hair-extensions"
+                      className="color-swatch--small"
+                      aria-label={shade.label}
+                      style={{
+                        backgroundColor: hexMap[shade.code] || '#1b1817',
+                        borderRadius: 0,
+                        width: '14px',
+                        height: '14px',
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
