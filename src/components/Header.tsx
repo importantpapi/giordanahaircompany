@@ -114,9 +114,30 @@ export function Header() {
                   className="site-header__logo-link"
                   aria-label="Giordanahaircompany Home"
                 >
-                  <div className="brand-monogram">
-                    <span className="brand-monogram__main">GIORDANA</span>
-                    <span className="brand-monogram__sub">Hair Company</span>
+                  <div className="brand-monogram" style={{ flexDirection: 'row', gap: '10px', alignItems: 'center' }}>
+                    <span
+                      style={{
+                        width: '30px',
+                        height: '30px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #c6a575 0%, #9b7a4b 100%)',
+                        color: '#ffffff',
+                        fontFamily: 'var(--typeHeaderPrimary)',
+                        fontSize: '12px',
+                        fontWeight: 700,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        letterSpacing: '0.04em',
+                        flexShrink: 0,
+                      }}
+                    >
+                      GH
+                    </span>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                      <span className="brand-monogram__main">GIORDANA</span>
+                      <span className="brand-monogram__sub">Hair Company</span>
+                    </div>
                   </div>
                 </Link>
               </div>

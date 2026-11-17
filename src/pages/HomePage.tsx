@@ -260,8 +260,11 @@ export function HomePage() {
                         }}
                       />
                     </div>
-                    <div style={{ fontSize: '12px', fontWeight: 500, color: '#000000' }}>
-                      {shade.label}
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: '#000000', letterSpacing: '0.08em' }}>
+                      #{shade.code.toUpperCase()}
+                    </div>
+                    <div style={{ fontSize: '10px', color: '#555555', textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '2px' }}>
+                      {shade.name}
                     </div>
                   </Link>
                 ))}
