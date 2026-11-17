@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, ChevronDown, HelpCircle } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import { REVIEWS } from '../data/catalog';
+import { REVIEWS, SHADE_SWATCHES } from '../data/catalog';
 
 export function ProductPage() {
   const { handle } = useParams();
+  const [searchParams] = useSearchParams();
   const { products, addToCart } = useCart();
   const { t } = useLanguage();
 
   const product = products.find((p) => p.handle === handle) || products[0];
+  const colorParam = searchParams.get('color');
 
   const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || '1b');
+  const [selectedColor, setSelectedColor] = useState(
+    colorParam || product.colors[0]?.name || '1b'
+  );
   const [selectedLength, setSelectedLength] = useState(product.lengths[0] || '18"');
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [askSent, setAskSent] = useState(false);
@@ -23,13 +27,13 @@ export function ProductPage() {
 
   useEffect(() => {
     setSelectedImage(0);
-    setSelectedColor(product.colors[0]?.name || '1b');
+    setSelectedColor(colorParam || product.colors[0]?.name || '1b');
     setSelectedLength(product.lengths[0] || '18"');
     setOpenAccordion(null);
     setAskSent(false);
     setShowReviewForm(false);
     setReviewSubmitted(false);
-  }, [product]);
+  }, [product, colorParam]);
 
   const activeVariant =
     product.variants.find(
@@ -163,6 +167,7 @@ export function ProductPage() {
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 {product.colors.map((c) => {
                   const active = selectedColor === c.name;
+                  const shadeMatch = SHADE_SWATCHES.find((s) => s.code.toLowerCase() === c.name.toLowerCase());
                   return (
                     <button
                       key={c.name}
@@ -171,25 +176,39 @@ export function ProductPage() {
                       title={c.label}
                       aria-label={c.label}
                       style={{
-                        width: '40px',
-                        height: '40px',
+                        width: '42px',
+                        height: '42px',
                         padding: '2px',
                         border: active ? '2px solid #000000' : '1px solid #d4d4d4',
                         background: '#ffffff',
                         cursor: 'pointer',
+                        overflow: 'hidden',
                       }}
                     >
-                      <span
-                        style={{
-                          display: 'block',
-                          width: '100%',
-                          height: '100%',
-                          backgroundColor: c.hex,
-                          backgroundImage: c.swatchImage ? `url(${c.swatchImage})` : `linear-gradient(135deg, ${c.hex} 0%, ${c.hex}dd 50%, ${c.hex} 100%)`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                        }}
-                      />
+                      {shadeMatch ? (
+                        <img
+                          src={shadeMatch.textureImage}
+                          alt={c.label}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            filter: shadeMatch.filter || undefined,
+                          }}
+                        />
+                      ) : (
+                        <span
+                          style={{
+                            display: 'block',
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: c.hex,
+                            backgroundImage: c.swatchImage ? `url(${c.swatchImage})` : `linear-gradient(135deg, ${c.hex} 0%, ${c.hex}dd 50%, ${c.hex} 100%)`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                          }}
+                        />
+                      )}
                     </button>
                   );
                 })}

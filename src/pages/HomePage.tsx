@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Award, CheckCircle2, Globe2, Heart, Sparkles } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import { CUSTOM_SHADE_GALLERY } from '../data/catalog';
+import { EXTENSION_METHODS, SHADE_SWATCHES } from '../data/catalog';
 
 const HERO_VIDEO_URL =
   'https://cdn.shopify.com/videos/c/o/v/07609c40a7224d06806ecaf806b24864.mp4';
@@ -22,6 +23,7 @@ const IG_IMAGES = [
 export function HomePage() {
   const { products } = useCart();
   const { t } = useLanguage();
+  const [selectedMethod, setSelectedMethod] = useState(EXTENSION_METHODS[0].id);
 
   const bundles = products.filter((p) => p.collection === 'hair-extension-bundles').slice(0, 4);
   const tapeIns = products.filter((p) => p.collection === 'tape-in-extensions').slice(0, 3);
@@ -183,7 +185,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 9. The Giordana Selection (Clean Motion Theme Row matching Screenshot 2) */}
+      {/* 9. The Giordana Selection — Click a method, see all uniform daylight hair color squares */}
       <section className="index-section" style={{ paddingTop: '20px' }}>
         <div className="page-width">
           <div className="section-header">
@@ -193,53 +195,79 @@ export function HomePage() {
             </Link>
           </div>
 
-          <div className="product-grid" style={{ gridTemplateColumns: 'repeat(5, minmax(0, 1fr))' }}>
-            {CUSTOM_SHADE_GALLERY.map((shade) => {
-              const hexMap: Record<string, string> = {
-                '#18A': '#c7b08a',
-                '#30': '#7a4128',
-                '#60': '#efe8d6',
-                '#350': '#9e4725',
-                '#1001': '#e8dec8',
-              };
+          {/* Method Tabs */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '26px' }}>
+            {EXTENSION_METHODS.map((m) => {
+              const active = selectedMethod === m.id;
               return (
-                <div key={shade.code} className="grid-product__content">
-                  <Link
-                    to="/collections/hair-extension-bundles/products/natural-wavy-hair-extensions"
-                    className="grid-product__link"
-                  >
-                    <div className="grid-product__image-mask" style={{ backgroundColor: '#ffffff' }}>
-                      <img
-                        src={shade.images[0]}
-                        alt={shade.label}
-                        loading="lazy"
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
-                    <div className="grid-product__meta">
-                      <div className="grid-product__title">{shade.label}</div>
-                      <div className="grid-product__price">
-                        <span>{t.product.from} $140</span>
-                      </div>
-                    </div>
-                  </Link>
-                  <div className="grid-product__colors">
-                    <Link
-                      to="/collections/hair-extension-bundles/products/natural-wavy-hair-extensions"
-                      className="color-swatch--small"
-                      aria-label={shade.label}
-                      style={{
-                        backgroundColor: hexMap[shade.code] || '#1b1817',
-                        borderRadius: 0,
-                        width: '14px',
-                        height: '14px',
-                      }}
-                    />
-                  </div>
-                </div>
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => setSelectedMethod(m.id)}
+                  style={{
+                    padding: '9px 16px',
+                    border: active ? '2px solid #000000' : '1px solid #d4d4d4',
+                    background: active ? '#000000' : '#ffffff',
+                    color: active ? '#ffffff' : '#000000',
+                    fontSize: '12px',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {m.label}
+                </button>
               );
             })}
           </div>
+
+          {/* Uniform Square Daylight Hair Swatch Line */}
+          {(() => {
+            const activeMethodObj = EXTENSION_METHODS.find((m) => m.id === selectedMethod) || EXTENSION_METHODS[0];
+            const shadesForMethod = SHADE_SWATCHES.filter((s) => s.methods.includes(selectedMethod));
+            return (
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(112px, 1fr))',
+                  gap: '14px',
+                }}
+              >
+                {shadesForMethod.map((shade) => (
+                  <Link
+                    key={shade.code}
+                    to={`/collections/${activeMethodObj.collection}/products/${activeMethodObj.defaultProduct}?color=${encodeURIComponent(shade.code)}`}
+                    style={{ display: 'block', textAlign: 'center' }}
+                  >
+                    <div
+                      style={{
+                        width: '100%',
+                        aspectRatio: '1 / 1',
+                        overflow: 'hidden',
+                        marginBottom: '8px',
+                        border: '1px solid #ededed',
+                      }}
+                    >
+                      <img
+                        src={shade.textureImage}
+                        alt={shade.label}
+                        loading="lazy"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          filter: shade.filter || undefined,
+                        }}
+                      />
+                    </div>
+                    <div style={{ fontSize: '12px', fontWeight: 500, color: '#000000' }}>
+                      {shade.label}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 

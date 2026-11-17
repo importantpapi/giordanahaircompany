@@ -15,6 +15,123 @@ const COLOR_MAP: Record<string, { name: string; label: string; hex: string; swat
   '1001': { name: '1001', label: '#1001 - Light Ash Blonde', hex: '#e8dec8', swatchImage: '/shades/1001-1.webp' },
 };
 
+export interface ShadeSwatch {
+  code: string;
+  name: string;
+  label: string;
+  hex: string;
+  textureImage: string;
+  filter?: string;
+  methods: Array<'tape-in' | 'genius-weft' | 'machine-weft' | 'clip-in' | 'keratin'>;
+}
+
+export const EXTENSION_METHODS = [
+  { id: 'tape-in' as const, label: 'Tape-in Extensions', collection: 'tape-in-extensions', defaultProduct: 'indian-tape-hair-extensions-natural-wavy' },
+  { id: 'genius-weft' as const, label: 'Genius Weft', collection: 'hair-extension-bundles', defaultProduct: 'natural-wavy-hair-extensions' },
+  { id: 'machine-weft' as const, label: 'Machine Weft', collection: 'hair-extension-bundles', defaultProduct: 'hair-extensions-straight' },
+  { id: 'clip-in' as const, label: 'Clip-in Extensions', collection: 'clip-in-extensions', defaultProduct: 'clip-in-hair-extensions-natural-wavy' },
+  { id: 'keratin' as const, label: 'Keratin Extensions', collection: 'u-tip-extensions', defaultProduct: 'indian-u-tip-keratin-extensions-natural-wavy' },
+];
+
+export const SHADE_SWATCHES: ShadeSwatch[] = [
+  {
+    code: '1',
+    name: 'Jet Black',
+    label: '#1 Jet Black',
+    hex: '#090909',
+    textureImage: '/shades/30-2.webp',
+    filter: 'grayscale(100%) brightness(0.28) contrast(1.25)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '1b',
+    name: 'Natural Black',
+    label: '#1B Natural Black',
+    hex: '#1b1817',
+    textureImage: '/shades/30-2.webp',
+    filter: 'saturate(0.35) brightness(0.36) contrast(1.15)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '2',
+    name: 'Darkest Brown',
+    label: '#2 Darkest Brown',
+    hex: '#2c1f19',
+    textureImage: '/shades/30-2.webp',
+    filter: 'saturate(0.55) brightness(0.48) contrast(1.1)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '4',
+    name: 'Medium Brown',
+    label: '#4 Medium Brown',
+    hex: '#4b3326',
+    textureImage: '/shades/30-2.webp',
+    filter: 'saturate(0.75) brightness(0.68)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '6',
+    name: 'Chestnut Brown',
+    label: '#6 Chestnut Brown',
+    hex: '#6f4e37',
+    textureImage: '/shades/30-2.webp',
+    filter: 'saturate(0.85) hue-rotate(8deg) brightness(0.85)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '10',
+    name: 'Light Brown',
+    label: '#10 Light Brown',
+    hex: '#8b6948',
+    textureImage: '/shades/1001-4.webp',
+    filter: 'sepia(0.35) brightness(0.66) saturate(1.15)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '18A',
+    name: 'Ash Blonde',
+    label: '#18A Ash Blonde',
+    hex: '#c7b08a',
+    textureImage: '/shades/1001-4.webp',
+    filter: 'sepia(0.18) brightness(0.84) saturate(0.85)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '30',
+    name: 'Medium Auburn',
+    label: '#30 Medium Auburn',
+    hex: '#7a4128',
+    textureImage: '/shades/30-2.webp',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '350',
+    name: 'Copper Auburn',
+    label: '#350 Copper Auburn',
+    hex: '#9e4725',
+    textureImage: '/shades/350-3.jpg',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '60',
+    name: 'Platinum Blonde',
+    label: '#60 Platinum Blonde',
+    hex: '#efe8d6',
+    textureImage: '/shades/1001-4.webp',
+    filter: 'brightness(1.08) saturate(0.75)',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+  {
+    code: '1001',
+    name: 'Light Ash Blonde',
+    label: '#1001 Light Ash Blonde',
+    hex: '#e8dec8',
+    textureImage: '/shades/1001-4.webp',
+    methods: ['tape-in', 'genius-weft', 'machine-weft', 'clip-in', 'keratin'],
+  },
+];
+
 export const CUSTOM_SHADE_GALLERY = [
   { code: '#18A', label: 'Ash Blonde (#18A)', images: ['/shades/18A.webp'] },
   { code: '#30', label: 'Medium Auburn (#30)', images: ['/shades/30-1.webp', '/shades/30-2.webp', '/shades/30-3.jpg', '/shades/30-4.webp'] },

@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import { COLLECTIONS, CUSTOM_SHADE_GALLERY, FAQS, REVIEWS, SERVICES } from '../data/catalog';
+import { COLLECTIONS, CUSTOM_SHADE_GALLERY, EXTENSION_METHODS, FAQS, REVIEWS, SERVICES, SHADE_SWATCHES } from '../data/catalog';
 
 const SERVICES_HERO_IMG =
   'https://laextensionsshop.com/cdn/shop/files/blowdrying-hair-on-round-brush.jpg?v=1671557276&width=2400';
@@ -410,13 +410,9 @@ export function NewsPage() {
 
 export function ShadesPage() {
   const { t } = useLanguage();
-  const methods = [
-    { label: 'Tape-in Extensions', to: '/collections/tape-in-extensions' },
-    { label: 'Genius Weft', to: '/collections/hair-extension-bundles' },
-    { label: 'Machine Weft', to: '/collections/hair-extension-bundles' },
-    { label: 'Clip-in Extensions', to: '/collections/clip-in-extensions' },
-    { label: 'Keratin Extensions', to: '/collections/u-tip-extensions' },
-  ];
+  const [selectedMethod, setSelectedMethod] = useState(EXTENSION_METHODS[0].id);
+  const activeMethodObj = EXTENSION_METHODS.find((m) => m.id === selectedMethod) || EXTENSION_METHODS[0];
+  const shadesForMethod = SHADE_SWATCHES.filter((s) => s.methods.includes(selectedMethod));
 
   return (
     <main className="index-section">
@@ -426,44 +422,54 @@ export function ShadesPage() {
             {t.home.giordanaSelectionTitle}
           </div>
           <h1>{t.home.giordanaSelectionHeadline}</h1>
-          <p style={{ color: '#444444', lineHeight: 1.8, marginBottom: '20px' }}>
+          <p style={{ color: '#444444', lineHeight: 1.8, marginBottom: '22px' }}>
             {t.home.giordanaSelectionIntro}
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', marginBottom: '22px' }}>
-            {methods.map((m) => (
-              <Link
-                key={m.label}
-                to={m.to}
-                style={{ border: '1px solid #000000', padding: '8px 16px', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }}
-              >
-                {m.label}
-              </Link>
-            ))}
+            {EXTENSION_METHODS.map((m) => {
+              const active = selectedMethod === m.id;
+              return (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => setSelectedMethod(m.id)}
+                  style={{
+                    border: active ? '2px solid #000000' : '1px solid #d4d4d4',
+                    background: active ? '#000000' : '#ffffff',
+                    color: active ? '#ffffff' : '#000000',
+                    padding: '9px 16px',
+                    fontSize: '12px',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {m.label}
+                </button>
+              );
+            })}
           </div>
           <p style={{ fontSize: '13px', lineHeight: 1.75, background: '#f7f7f7', padding: '14px 18px', borderLeft: '3px solid #000000', textAlign: 'left' }}>
             <strong>{t.home.giordanaSelectionImportantLabel}</strong> {t.home.giordanaSelectionImportantText}
           </p>
         </header>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
-          {CUSTOM_SHADE_GALLERY.map((shade) => (
-            <section key={shade.code} style={{ borderBottom: '1px solid #ededed', paddingBottom: '36px' }}>
-              <h2 style={{ fontSize: '22px', marginBottom: '18px' }}>{shade.label}</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
-                {shade.images.map((img, i) => (
-                  <Link
-                    key={i}
-                    to="/collections/hair-extension-bundles/products/natural-wavy-hair-extensions"
-                    style={{ border: '1px solid #ededed', display: 'block' }}
-                  >
-                    <img
-                      src={img}
-                      alt={`${shade.label} ${i + 1}`}
-                      style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }}
-                    />
-                  </Link>
-                ))}
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '18px' }}>
+          {shadesForMethod.map((shade) => (
+            <Link
+              key={shade.code}
+              to={`/collections/${activeMethodObj.collection}/products/${activeMethodObj.defaultProduct}?color=${encodeURIComponent(shade.code)}`}
+              style={{ display: 'block', textAlign: 'center' }}
+            >
+              <div style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden', marginBottom: '8px', border: '1px solid #ededed' }}>
+                <img
+                  src={shade.textureImage}
+                  alt={shade.label}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: shade.filter || undefined }}
+                />
               </div>
-            </section>
+              <div style={{ fontSize: '13px', fontWeight: 500 }}>{shade.label}</div>
+            </Link>
           ))}
         </div>
       </div>
