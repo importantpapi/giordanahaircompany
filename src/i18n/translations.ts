@@ -47,6 +47,11 @@ export interface Translations {
     igTitle: string;
     igFollow: string;
     seeMore: string;
+    giordanaSelectionTitle: string;
+    giordanaSelectionHeadline: string;
+    giordanaSelectionIntro: string;
+    giordanaSelectionImportantLabel: string;
+    giordanaSelectionImportantText: string;
   };
   product: {
     from: string;
@@ -222,6 +227,13 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       igTitle: 'Instagram',
       igFollow: 'Follow us now on Instagram',
       seeMore: 'See More',
+      giordanaSelectionTitle: 'The Giordana Selection',
+      giordanaSelectionHeadline: 'One color, multiple application methods.',
+      giordanaSelectionIntro:
+        'At Giordana Hair Company, our color selection is tailored across different types of extensions. Choose your desired hair color and discover it in different methods:',
+      giordanaSelectionImportantLabel: 'Important:',
+      giordanaSelectionImportantText:
+        'We strive to offer the exact same color nuance across our different collections, so you can combine multiple extension methods with the most seamless color match possible.',
     },
     product: {
       from: 'from',
@@ -406,6 +418,13 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       igTitle: 'Instagram',
       igFollow: 'Suivez-nous sur Instagram',
       seeMore: 'Voir plus',
+      giordanaSelectionTitle: 'The Giordana Selection',
+      giordanaSelectionHeadline: 'Une couleur, plusieurs méthodes de pose.',
+      giordanaSelectionIntro:
+        'Chez Giordana Hair Company, notre sélection de couleurs est harmonisée sur différents types d’extensions. Choisissez votre teinte souhaitée et découvrez-la en plusieurs finitions :',
+      giordanaSelectionImportantLabel: 'Important :',
+      giordanaSelectionImportantText:
+        'Nous veillons à proposer la même nuance de couleur dans nos différentes collections afin que vous puissiez combiner plusieurs méthodes de pose avec une correspondance de couleur parfaite.',
     },
     product: {
       from: 'à partir de',
@@ -590,6 +609,13 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
       igTitle: 'Instagram',
       igFollow: 'Volg ons op Instagram',
       seeMore: 'Meer bekijken',
+      giordanaSelectionTitle: 'The Giordana Selection',
+      giordanaSelectionHeadline: 'Eén kleur, meerdere bevestigingsmethodes.',
+      giordanaSelectionIntro:
+        'Bij Giordana Hair Company is onze kleurselectie afgestemd op verschillende soorten extensions. Kies jouw gewenste haarkleur en ontdek deze in verschillende uitvoeringen:',
+      giordanaSelectionImportantLabel: 'Belangrijk:',
+      giordanaSelectionImportantText:
+        'Wij streven ernaar om dezelfde kleurnuance binnen onze verschillende collecties aan te bieden, zodat je verschillende extensionmethodes kunt combineren met een zo mooi mogelijke kleurovereenkomst.',
     },
     product: {
       from: 'vanaf',

@@ -409,13 +409,39 @@ export function NewsPage() {
 }
 
 export function ShadesPage() {
+  const { t } = useLanguage();
+  const methods = [
+    { label: 'Tape-in Extensions', to: '/collections/tape-in-extensions' },
+    { label: 'Genius Weft', to: '/collections/hair-extension-bundles' },
+    { label: 'Machine Weft', to: '/collections/hair-extension-bundles' },
+    { label: 'Clip-in Extensions', to: '/collections/clip-in-extensions' },
+    { label: 'Keratin Extensions', to: '/collections/u-tip-extensions' },
+  ];
+
   return (
     <main className="index-section">
       <div className="page-width">
-        <header style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <h1>Signature Hair Shades</h1>
-          <p style={{ color: '#555555' }}>
-            Explore our custom shades (#18A, #30, #60, #350, #1001) available across our 100% Virgin Indian Hair collections
+        <header style={{ textAlign: 'center', marginBottom: '44px', maxWidth: '820px', marginLeft: 'auto', marginRight: 'auto' }}>
+          <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#666666', marginBottom: '8px' }}>
+            {t.home.giordanaSelectionTitle}
+          </div>
+          <h1>{t.home.giordanaSelectionHeadline}</h1>
+          <p style={{ color: '#444444', lineHeight: 1.8, marginBottom: '20px' }}>
+            {t.home.giordanaSelectionIntro}
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', marginBottom: '22px' }}>
+            {methods.map((m) => (
+              <Link
+                key={m.label}
+                to={m.to}
+                style={{ border: '1px solid #000000', padding: '8px 16px', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+              >
+                {m.label}
+              </Link>
+            ))}
+          </div>
+          <p style={{ fontSize: '13px', lineHeight: 1.75, background: '#f7f7f7', padding: '14px 18px', borderLeft: '3px solid #000000', textAlign: 'left' }}>
+            <strong>{t.home.giordanaSelectionImportantLabel}</strong> {t.home.giordanaSelectionImportantText}
           </p>
         </header>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
