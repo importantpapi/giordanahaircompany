@@ -132,6 +132,8 @@ export const SHADE_SWATCHES: ShadeSwatch[] = [
   },
 ];
 
+const ALL_METHOD_COLORS = ['1', '1b', '2', '4', '6', '10', '18A', '30', '350', '60', '1001'];
+
 export const CUSTOM_SHADE_GALLERY = [
   { code: '#18A', label: 'Ash Blonde (#18A)', images: ['/shades/18A.webp'] },
   { code: '#30', label: 'Medium Auburn (#30)', images: ['/shades/30-1.webp', '/shades/30-2.webp', '/shades/30-3.jpg', '/shades/30-4.webp'] },
@@ -404,9 +406,9 @@ export const PRODUCTS: Product[] = [
       'https://laextensionsshop.com/cdn/shop/files/img_1132_800x.jpg?v=1687897286',
       'https://laextensionsshop.com/cdn/shop/products/1b_fd1bb240-0193-4d01-b272-e7f05808a378_800x.png?v=1687897286',
     ],
-    colors: makeColors(['1b', '2', '6', '613']),
+    colors: makeColors(ALL_METHOD_COLORS),
     lengths: Object.keys(TAPE_PRICES),
-    variants: buildVariants('indian-tape-hair-extensions-natural-wavy', TAPE_PRICES, ['1b', '2', '6', '613']),
+    variants: buildVariants('indian-tape-hair-extensions-natural-wavy', TAPE_PRICES, ALL_METHOD_COLORS),
     rating: 5,
     reviewCount: 31,
   },
@@ -456,9 +458,9 @@ export const PRODUCTS: Product[] = [
       'https://laextensionsshop.com/cdn/shop/files/naturalwaveclipins_800x.jpg?v=1689012399',
       'https://laextensionsshop.com/cdn/shop/products/1_4a074094-668a-4d08-868d-e83c5d8b412c_800x.png?v=1689012399',
     ],
-    colors: makeColors(['1', '2']),
+    colors: makeColors(ALL_METHOD_COLORS),
     lengths: Object.keys(CLIP_PRICES),
-    variants: buildVariants('clip-in-hair-extensions-natural-wavy', CLIP_PRICES, ['1', '2']),
+    variants: buildVariants('clip-in-hair-extensions-natural-wavy', CLIP_PRICES, ALL_METHOD_COLORS),
     rating: 5,
     reviewCount: 27,
   },
@@ -889,9 +891,9 @@ export const PRODUCTS: Product[] = [
       'https://laextensionsshop.com/cdn/shop/products/1b_7ffb58b3-cca5-4149-a1c2-c97949b41d83_800x.png?v=1685382126',
       'https://laextensionsshop.com/cdn/shop/files/WavyI-tips_800x.jpg?v=1685382088',
     ],
-    colors: makeColors(['1b', '2', '6', '613']),
+    colors: makeColors(ALL_METHOD_COLORS),
     lengths: Object.keys(TIP_PRICES),
-    variants: buildVariants('indian-u-tip-keratin-extensions-natural-wavy', TIP_PRICES, ['1b', '2', '6', '613'], { '6': 10, '613': 20 }),
+    variants: buildVariants('indian-u-tip-keratin-extensions-natural-wavy', TIP_PRICES, ALL_METHOD_COLORS, { '6': 10, '613': 20 }),
     rating: 5,
     reviewCount: 13,
   },

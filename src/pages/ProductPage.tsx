@@ -63,10 +63,12 @@ export function ProductPage() {
     });
   };
 
-  const activeColorObj = product.colors.find((c) => c.name === selectedColor);
+  const activeColorObj = product.colors.find((c) => c.name.toLowerCase() === selectedColor.toLowerCase());
+  const activeShadeMatch = SHADE_SWATCHES.find((s) => s.code.toLowerCase() === selectedColor.toLowerCase());
   const displayImages = activeColorObj?.swatchImage
     ? [activeColorObj.swatchImage, ...product.images.filter((im) => im !== activeColorObj.swatchImage)]
     : product.images;
+  const activeMainFilter = selectedImage === 0 && !activeColorObj?.swatchImage && activeShadeMatch?.filter ? activeShadeMatch.filter : undefined;
 
   const related = products
     .filter((p) => p.collection === product.collection && p.id !== product.id)
@@ -79,7 +81,11 @@ export function ProductPage() {
           {/* Left Column: Main Image + Square Thumbnails */}
           <div>
             <div className="product-gallery__main">
-              <img src={displayImages[selectedImage] || displayImages[0]} alt={product.title} />
+              <img
+                src={displayImages[selectedImage] || displayImages[0]}
+                alt={product.title}
+                style={{ filter: activeMainFilter }}
+              />
             </div>
             <div className="product-gallery__thumbs">
               {displayImages.map((img, idx) => (
@@ -172,7 +178,10 @@ export function ProductPage() {
                     <button
                       key={c.name}
                       type="button"
-                      onClick={() => setSelectedColor(c.name)}
+                      onClick={() => {
+                        setSelectedColor(c.name);
+                        setSelectedImage(0);
+                      }}
                       title={c.label}
                       aria-label={c.label}
                       style={{

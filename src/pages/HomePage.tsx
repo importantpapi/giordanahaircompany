@@ -226,15 +226,25 @@ export function HomePage() {
             const activeMethodObj = EXTENSION_METHODS.find((m) => m.id === selectedMethod) || EXTENSION_METHODS[0];
             const shadesForMethod = SHADE_SWATCHES.filter((s) => s.methods.includes(selectedMethod));
             return (
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: `repeat(${shadesForMethod.length}, minmax(88px, 1fr))`,
-                  gap: '12px',
-                  overflowX: 'auto',
-                  paddingBottom: '6px',
-                }}
-              >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', fontSize: '13px' }}>
+                  <span>
+                    <strong>{activeMethodObj.label}</strong> — {shadesForMethod.length} {t.product.color.toLowerCase()}s
+                  </span>
+                  <Link to={`/collections/${activeMethodObj.collection}`} style={{ textDecoration: 'underline', fontSize: '12px' }}>
+                    {activeMethodObj.label} →
+                  </Link>
+                </div>
+                <div
+                  key={selectedMethod}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${shadesForMethod.length}, minmax(88px, 1fr))`,
+                    gap: '12px',
+                    overflowX: 'auto',
+                    paddingBottom: '6px',
+                  }}
+                >
                 {shadesForMethod.map((shade) => (
                   <Link
                     key={shade.code}
@@ -270,6 +280,7 @@ export function HomePage() {
                     </div>
                   </Link>
                 ))}
+                </div>
               </div>
             );
           })()}
