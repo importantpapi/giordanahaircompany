@@ -229,8 +229,10 @@ export function HomePage() {
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(112px, 1fr))',
-                  gap: '14px',
+                  gridTemplateColumns: `repeat(${shadesForMethod.length}, minmax(88px, 1fr))`,
+                  gap: '12px',
+                  overflowX: 'auto',
+                  paddingBottom: '6px',
                 }}
               >
                 {shadesForMethod.map((shade) => (
