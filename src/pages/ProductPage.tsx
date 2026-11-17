@@ -167,12 +167,12 @@ export function ProductPage() {
 
             {/* Color Swatches */}
             <div className="variant-group">
-              <span style={{ display: 'block', fontFamily: 'var(--typeHeaderPrimary)', fontSize: '14px', fontWeight: 600, marginBottom: '8px' }}>
-                {t.product.color} — {selectedColor}
+              <span style={{ display: 'block', fontFamily: 'var(--typeHeaderPrimary)', fontSize: '14px', fontWeight: 600, marginBottom: '10px' }}>
+                {t.product.color} — {activeShadeMatch?.label || activeColorObj?.label || selectedColor}
               </span>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 {product.colors.map((c) => {
-                  const active = selectedColor === c.name;
+                  const active = selectedColor.toLowerCase() === c.name.toLowerCase();
                   const shadeMatch = SHADE_SWATCHES.find((s) => s.code.toLowerCase() === c.name.toLowerCase());
                   return (
                     <button
@@ -182,49 +182,28 @@ export function ProductPage() {
                         setSelectedColor(c.name);
                         setSelectedImage(0);
                       }}
-                      title={c.label}
-                      aria-label={c.label}
+                      title={shadeMatch?.label || c.label}
+                      aria-label={shadeMatch?.label || c.label}
                       style={{
-                        width: '62px',
-                        padding: '4px',
-                        border: active ? '2px solid #000000' : '1px solid #e0e0e0',
+                        width: '48px',
+                        height: '48px',
+                        padding: '2px',
+                        border: active ? '2px solid #000000' : '1px solid #d4d4d4',
                         background: '#ffffff',
                         cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '4px',
+                        overflow: 'hidden',
                       }}
                     >
-                      <div style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}>
-                        {shadeMatch ? (
-                          <img
-                            src={shadeMatch.textureImage}
-                            alt={c.label}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                              filter: shadeMatch.filter || undefined,
-                            }}
-                          />
-                        ) : (
-                          <span
-                            style={{
-                              display: 'block',
-                              width: '100%',
-                              height: '100%',
-                              backgroundColor: c.hex,
-                              backgroundImage: c.swatchImage ? `url(${c.swatchImage})` : `linear-gradient(135deg, ${c.hex} 0%, ${c.hex}dd 50%, ${c.hex} 100%)`,
-                              backgroundSize: 'cover',
-                              backgroundPosition: 'center',
-                            }}
-                          />
-                        )}
-                      </div>
-                      <span style={{ fontSize: '10px', fontWeight: 700, color: '#000000' }}>
-                        {c.name.toUpperCase()}
-                      </span>
+                      <img
+                        src={shadeMatch?.textureImage || '/shades/30-2.webp'}
+                        alt={shadeMatch?.label || c.label}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          filter: shadeMatch?.filter || undefined,
+                        }}
+                      />
                     </button>
                   );
                 })}
