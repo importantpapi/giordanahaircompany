@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, Search, ShoppingBag, User } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -9,6 +9,19 @@ export function Header() {
   const { itemCount, openCart, openSearch, openMobileMenu } = useCart();
   const { lang, setLang, t } = useLanguage();
   const [shopOpen, setShopOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+
+  const isHome = pathname === '/';
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [pathname]);
+
+  const isTransparent = isHome && !scrolled;
 
   const SHOP_LINKS = [
     { label: t.nav.allExtensions, to: '/collections/all' },
@@ -22,7 +35,7 @@ export function Header() {
   ];
 
   return (
-    <header className="site-header-wrapper">
+    <header className={`site-header-wrapper ${isTransparent ? 'site-header-wrapper--overlay' : ''}`}>
       <div className="site-header">
         <div className="page-width">
           <div className="header-layout">
@@ -136,9 +149,9 @@ export function Header() {
                     type="button"
                     onClick={() => setLang(code)}
                     style={{
-                      background: lang === code ? '#000000' : 'transparent',
-                      color: lang === code ? '#ffffff' : '#000000',
-                      border: '1px solid #e0e0e0',
+                      background: lang === code ? (isTransparent ? '#ffffff' : '#000000') : 'transparent',
+                      color: lang === code ? (isTransparent ? '#000000' : '#ffffff') : (isTransparent ? '#ffffff' : '#000000'),
+                      border: `1px solid ${isTransparent ? 'rgba(255,255,255,0.45)' : '#e0e0e0'}`,
                       padding: '3px 6px',
                       fontSize: '10px',
                       fontWeight: 600,

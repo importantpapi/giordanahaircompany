@@ -199,6 +199,7 @@ h3,
   background-color: var(--colorNav);
   color: var(--colorNavText);
   border-bottom: 1px solid var(--colorBorder);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .site-header-wrapper--overlay {
@@ -206,8 +207,14 @@ h3,
   left: 0;
   right: 0;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
+  background-color: transparent;
+  color: #ffffff;
+  border-bottom-color: transparent;
+}
+
+.site-header-wrapper--overlay .cart-link__bubble {
+  background: #ffffff;
+  color: #000000;
 }
 
 .site-header {
@@ -390,8 +397,8 @@ h3,
 }
 
 .hero--100vh {
-  height: calc(100vh - 104px);
-  min-height: 540px;
+  height: 100vh;
+  min-height: 580px;
 }
 
 .hero--650 {

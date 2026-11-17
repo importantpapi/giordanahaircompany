@@ -34,6 +34,20 @@ function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
+    const titleMap: Record<string, string> = {
+      '/': 'Giordanahaircompany - Human Hair Extensions, Clip in & Tape Extensions',
+      '/collections/all': 'Shop All Extensions – Giordanahaircompany',
+      '/pages/shades': 'The Giordana Selection – Shades & Methods – Giordanahaircompany',
+      '/pages/services': 'Services – Giordanahaircompany',
+      '/pages/our-story': 'Our Story – Giordanahaircompany',
+      '/pages/faq': 'FAQ – Giordanahaircompany',
+      '/pages/reviews': 'Customer Reviews – Giordanahaircompany',
+      '/pages/contact': 'Contact Us – Giordanahaircompany',
+      '/cart': 'Your Shopping Cart – Giordanahaircompany',
+    };
+    document.title =
+      titleMap[pathname] ||
+      'Giordanahaircompany - 100% Virgin Human Hair Extensions';
   }, [pathname]);
   return null;
 }
