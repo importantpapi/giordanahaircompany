@@ -3,6 +3,7 @@ import { Award, CheckCircle2, Globe2, Heart, Sparkles } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
+import { CUSTOM_SHADE_GALLERY } from '../data/catalog';
 
 const HERO_VIDEO_URL =
   'https://cdn.shopify.com/videos/c/o/v/07609c40a7224d06806ecaf806b24864.mp4';
@@ -182,7 +183,35 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 9. Install Services Hero */}
+      {/* 9. Signature Hair Shades (#18A, #30, #60, #350, #1001) */}
+      <section className="index-section" style={{ borderTop: '1px solid #ededed' }}>
+        <div className="page-width">
+          <div className="section-header">
+            <h2 className="section-header__title">Signature Hair Shades</h2>
+            <Link to="/pages/shades" className="section-header__link">
+              {t.home.viewAll}
+            </Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '20px' }}>
+            {CUSTOM_SHADE_GALLERY.map((shade) => (
+              <Link
+                key={shade.code}
+                to="/collections/hair-extension-bundles/products/natural-wavy-hair-extensions"
+                style={{ border: '1px solid #ededed', padding: '12px', textAlign: 'center', display: 'block' }}
+              >
+                <img
+                  src={shade.images[0]}
+                  alt={shade.label}
+                  style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', marginBottom: '10px' }}
+                />
+                <div style={{ fontSize: '13px', fontWeight: 500 }}>{shade.label}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Install Services Hero */}
       <section className="hero hero--650">
         <div className="hero__media">
           <img src={SERVICES_HERO_IMG} alt={t.home.servicesTitle} />

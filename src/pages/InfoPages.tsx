@@ -408,6 +408,43 @@ export function NewsPage() {
   );
 }
 
+export function ShadesPage() {
+  return (
+    <main className="index-section">
+      <div className="page-width">
+        <header style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h1>Signature Hair Shades</h1>
+          <p style={{ color: '#555555' }}>
+            Explore our custom shades (#18A, #30, #60, #350, #1001) available across our 100% Virgin Indian Hair collections
+          </p>
+        </header>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+          {CUSTOM_SHADE_GALLERY.map((shade) => (
+            <section key={shade.code} style={{ borderBottom: '1px solid #ededed', paddingBottom: '36px' }}>
+              <h2 style={{ fontSize: '22px', marginBottom: '18px' }}>{shade.label}</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
+                {shade.images.map((img, i) => (
+                  <Link
+                    key={i}
+                    to="/collections/hair-extension-bundles/products/natural-wavy-hair-extensions"
+                    style={{ border: '1px solid #ededed', display: 'block' }}
+                  >
+                    <img
+                      src={img}
+                      alt={`${shade.label} ${i + 1}`}
+                      style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }}
+                    />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
 export function InstagramPage() {
   const { products } = useCart();
   const { t } = useLanguage();

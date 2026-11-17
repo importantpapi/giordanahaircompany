@@ -24,6 +24,7 @@ import {
   ReviewsPage,
   SalonPoliciesPage,
   ServicesPage,
+  ShadesPage,
   ThanksPage,
 } from './pages/InfoPages';
 import { ProductPage } from './pages/ProductPage';
@@ -61,6 +62,7 @@ export function App() {
           <Route path="/pages/contact" element={<ContactPage />} />
           <Route path="/pages/get-the-most-from-your-hair" element={<CareGuidePage />} />
           <Route path="/pages/instagram" element={<InstagramPage />} />
+          <Route path="/pages/shades" element={<ShadesPage />} />
           <Route path="/pages/thanks" element={<ThanksPage />} />
           <Route path="/blogs/news" element={<NewsPage />} />
           <Route path="/account" element={<AccountPage />} />
