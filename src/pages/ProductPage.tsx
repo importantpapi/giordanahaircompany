@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, ChevronDown, HelpCircle } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
@@ -8,13 +8,15 @@ import { REVIEWS } from '../data/catalog';
 
 export function ProductPage() {
   const { handle } = useParams();
+  const [searchParams] = useSearchParams();
   const { products, addToCart } = useCart();
   const { t } = useLanguage();
 
   const product = products.find((p) => p.handle === handle) || products[0];
+  const colorParam = searchParams.get('color');
 
   const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || '1b');
+  const [selectedColor, setSelectedColor] = useState(colorParam || product.colors[0]?.name || '1b');
   const [selectedLength, setSelectedLength] = useState(product.lengths[0] || '18"');
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [askSent, setAskSent] = useState(false);
@@ -23,13 +25,13 @@ export function ProductPage() {
 
   useEffect(() => {
     setSelectedImage(0);
-    setSelectedColor(product.colors[0]?.name || '1b');
+    setSelectedColor(colorParam || product.colors[0]?.name || '1b');
     setSelectedLength(product.lengths[0] || '18"');
     setOpenAccordion(null);
     setAskSent(false);
     setShowReviewForm(false);
     setReviewSubmitted(false);
-  }, [product]);
+  }, [product, colorParam]);
 
   const activeVariant =
     product.variants.find(

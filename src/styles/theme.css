@@ -163,6 +163,14 @@ h3,
   opacity: 1;
 }
 
+.hero .btn--inverse {
+  text-transform: none;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 24px;
+}
+
 .btn--secondary {
   background-color: transparent;
   color: #000000;

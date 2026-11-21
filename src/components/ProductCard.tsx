@@ -35,7 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.colors.map((c) => (
             <Link
               key={c.name}
-              to={`/collections/${product.collection}/products/${product.handle}`}
+              to={`/collections/${product.collection}/products/${product.handle}?color=${encodeURIComponent(c.name)}`}
               className="color-swatch--small"
               aria-label={`${product.title} - ${c.label}`}
               title={c.label}
