@@ -18,7 +18,7 @@ export interface Product {
   description: string;
   details: string[];
   images: string[];
-  colors: { name: string; label: string; hex: string; swatchImage?: string }[];
+  colors: { name: string; label: string; hex: string }[];
   lengths: string[];
   variants: ProductVariant[];
   rating: number;

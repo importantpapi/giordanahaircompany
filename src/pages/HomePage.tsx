@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Award, CheckCircle2, Globe2, Heart, Sparkles } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import { EXTENSION_METHODS, SHADE_SWATCHES } from '../data/catalog';
 
 const HERO_VIDEO_URL =
   'https://cdn.shopify.com/videos/c/o/v/07609c40a7224d06806ecaf806b24864.mp4';
@@ -23,7 +21,6 @@ const IG_IMAGES = [
 export function HomePage() {
   const { products } = useCart();
   const { t } = useLanguage();
-  const [selectedMethod, setSelectedMethod] = useState(EXTENSION_METHODS[0].id);
 
   const bundles = products.filter((p) => p.collection === 'hair-extension-bundles').slice(0, 4);
   const tapeIns = products.filter((p) => p.collection === 'tape-in-extensions').slice(0, 3);
@@ -185,109 +182,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 9. The Giordana Selection — Click a method, see all uniform daylight hair color squares */}
-      <section className="index-section" style={{ paddingTop: '20px' }}>
-        <div className="page-width">
-          <div className="section-header">
-            <h2 className="section-header__title">{t.home.giordanaSelectionTitle}</h2>
-            <Link to="/pages/shades" className="section-header__link">
-              {t.home.viewAll}
-            </Link>
-          </div>
-
-          {/* Method Tabs */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '26px' }}>
-            {EXTENSION_METHODS.map((m) => {
-              const active = selectedMethod === m.id;
-              return (
-                <button
-                  key={m.id}
-                  type="button"
-                  onClick={() => setSelectedMethod(m.id)}
-                  style={{
-                    padding: '9px 16px',
-                    border: active ? '2px solid #000000' : '1px solid #d4d4d4',
-                    background: active ? '#000000' : '#ffffff',
-                    color: active ? '#ffffff' : '#000000',
-                    fontSize: '12px',
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {m.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Uniform Square Daylight Hair Swatch Line */}
-          {(() => {
-            const activeMethodObj = EXTENSION_METHODS.find((m) => m.id === selectedMethod) || EXTENSION_METHODS[0];
-            const shadesForMethod = SHADE_SWATCHES.filter((s) => s.methods.includes(selectedMethod));
-            return (
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', fontSize: '13px' }}>
-                  <span>
-                    <strong>{activeMethodObj.label}</strong> — {shadesForMethod.length} {t.product.color.toLowerCase()}s
-                  </span>
-                  <Link to={`/collections/${activeMethodObj.collection}`} style={{ textDecoration: 'underline', fontSize: '12px' }}>
-                    {activeMethodObj.label} →
-                  </Link>
-                </div>
-                <div
-                  key={selectedMethod}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${shadesForMethod.length}, minmax(88px, 1fr))`,
-                    gap: '12px',
-                    overflowX: 'auto',
-                    paddingBottom: '6px',
-                  }}
-                >
-                {shadesForMethod.map((shade) => (
-                  <Link
-                    key={shade.code}
-                    to={`/collections/${activeMethodObj.collection}/products/${activeMethodObj.defaultProduct}?color=${encodeURIComponent(shade.code)}`}
-                    style={{ display: 'block', textAlign: 'center' }}
-                  >
-                    <div
-                      style={{
-                        width: '100%',
-                        aspectRatio: '1 / 1',
-                        overflow: 'hidden',
-                        marginBottom: '8px',
-                        border: '1px solid #ededed',
-                      }}
-                    >
-                      <img
-                        src={shade.textureImage}
-                        alt={shade.label}
-                        loading="lazy"
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          filter: shade.filter || undefined,
-                        }}
-                      />
-                    </div>
-                    <div style={{ fontSize: '12px', fontWeight: 700, color: '#000000', letterSpacing: '0.08em' }}>
-                      #{shade.code.toUpperCase()}
-                    </div>
-                    <div style={{ fontSize: '10px', color: '#555555', textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '2px' }}>
-                      {shade.name}
-                    </div>
-                  </Link>
-                ))}
-                </div>
-              </div>
-            );
-          })()}
-        </div>
-      </section>
-
-      {/* 10. Install Services Hero */}
+      {/* 9. Install Services Hero */}
       <section className="hero hero--650">
         <div className="hero__media">
           <img src={SERVICES_HERO_IMG} alt={t.home.servicesTitle} />

@@ -39,15 +39,7 @@ export function ProductCard({ product }: { product: Product }) {
               className="color-swatch--small"
               aria-label={`${product.title} - ${c.label}`}
               title={c.label}
-              style={{
-                backgroundColor: c.hex,
-                backgroundImage: c.swatchImage ? `url(${c.swatchImage})` : undefined,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                borderRadius: 0,
-                width: '14px',
-                height: '14px',
-              }}
+              style={{ backgroundColor: c.hex, borderRadius: 0, width: '14px', height: '14px' }}
             />
           ))}
         </div>

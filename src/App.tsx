@@ -24,7 +24,6 @@ import {
   ReviewsPage,
   SalonPoliciesPage,
   ServicesPage,
-  ShadesPage,
   ThanksPage,
 } from './pages/InfoPages';
 import { ProductPage } from './pages/ProductPage';
@@ -34,20 +33,6 @@ function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
-    const titleMap: Record<string, string> = {
-      '/': 'Giordanahaircompany - Human Hair Extensions, Clip in & Tape Extensions',
-      '/collections/all': 'Shop All Extensions – Giordanahaircompany',
-      '/pages/shades': 'The Giordana Selection – Shades & Methods – Giordanahaircompany',
-      '/pages/services': 'Services – Giordanahaircompany',
-      '/pages/our-story': 'Our Story – Giordanahaircompany',
-      '/pages/faq': 'FAQ – Giordanahaircompany',
-      '/pages/reviews': 'Customer Reviews – Giordanahaircompany',
-      '/pages/contact': 'Contact Us – Giordanahaircompany',
-      '/cart': 'Your Shopping Cart – Giordanahaircompany',
-    };
-    document.title =
-      titleMap[pathname] ||
-      'Giordanahaircompany - 100% Virgin Human Hair Extensions';
   }, [pathname]);
   return null;
 }
@@ -76,7 +61,6 @@ export function App() {
           <Route path="/pages/contact" element={<ContactPage />} />
           <Route path="/pages/get-the-most-from-your-hair" element={<CareGuidePage />} />
           <Route path="/pages/instagram" element={<InstagramPage />} />
-          <Route path="/pages/shades" element={<ShadesPage />} />
           <Route path="/pages/thanks" element={<ThanksPage />} />
           <Route path="/blogs/news" element={<NewsPage />} />
           <Route path="/account" element={<AccountPage />} />

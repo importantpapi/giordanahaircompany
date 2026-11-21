@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import { COLLECTIONS, EXTENSION_METHODS, SHADE_SWATCHES } from '../data/catalog';
+import { COLLECTIONS } from '../data/catalog';
 
 const ALL_SECTIONS = [
   { handle: 'hair-extension-bundles', title: 'Bundle Hair Extensions', cols: 4 },
@@ -22,7 +22,6 @@ export function CollectionPage() {
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'title-asc'>('featured');
 
   const collection = COLLECTIONS.find((c) => c.handle === handle) || COLLECTIONS[0];
-  const methodForCollection = EXTENSION_METHODS.find((m) => m.collection === handle);
 
   const items = useMemo(() => {
     const filtered =
@@ -75,62 +74,12 @@ export function CollectionPage() {
   return (
     <main className="index-section">
       <div className="page-width">
-        <header style={{ textAlign: 'center', marginBottom: '36px' }}>
+        <header style={{ textAlign: 'center', marginBottom: '48px' }}>
           <h1>{collection.title}</h1>
           <p className="collection-description" style={{ color: '#555555', maxWidth: '680px', margin: '0 auto' }}>
             {collection.description}
           </p>
         </header>
-
-        {methodForCollection && (
-          <div style={{ marginBottom: '36px' }}>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${SHADE_SWATCHES.length}, minmax(84px, 1fr))`,
-                gap: '10px',
-                overflowX: 'auto',
-                paddingBottom: '6px',
-              }}
-            >
-              {SHADE_SWATCHES.map((shade) => (
-                <Link
-                  key={shade.code}
-                  to={`/collections/${methodForCollection.collection}/products/${methodForCollection.defaultProduct}?color=${encodeURIComponent(shade.code)}`}
-                  style={{ display: 'block', textAlign: 'center' }}
-                >
-                  <div
-                    style={{
-                      width: '100%',
-                      aspectRatio: '1 / 1',
-                      overflow: 'hidden',
-                      marginBottom: '6px',
-                      border: '1px solid #ededed',
-                    }}
-                  >
-                    <img
-                      src={shade.textureImage}
-                      alt={shade.label}
-                      loading="lazy"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        filter: shade.filter || undefined,
-                      }}
-                    />
-                  </div>
-                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#000000' }}>
-                    #{shade.code.toUpperCase()}
-                  </div>
-                  <div style={{ fontSize: '9px', color: '#555555', textTransform: 'uppercase' }}>
-                    {shade.name}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
 
         <div
           style={{

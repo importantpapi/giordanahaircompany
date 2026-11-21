@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CheckCircle2, ChevronDown, HelpCircle } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
-import { REVIEWS, SHADE_SWATCHES } from '../data/catalog';
+import { REVIEWS } from '../data/catalog';
 
 export function ProductPage() {
   const { handle } = useParams();
-  const [searchParams] = useSearchParams();
   const { products, addToCart } = useCart();
   const { t } = useLanguage();
 
   const product = products.find((p) => p.handle === handle) || products[0];
-  const colorParam = searchParams.get('color');
 
   const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(
-    colorParam || product.colors[0]?.name || '1b'
-  );
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || '1b');
   const [selectedLength, setSelectedLength] = useState(product.lengths[0] || '18"');
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [askSent, setAskSent] = useState(false);
@@ -27,13 +23,13 @@ export function ProductPage() {
 
   useEffect(() => {
     setSelectedImage(0);
-    setSelectedColor(colorParam || product.colors[0]?.name || '1b');
+    setSelectedColor(product.colors[0]?.name || '1b');
     setSelectedLength(product.lengths[0] || '18"');
     setOpenAccordion(null);
     setAskSent(false);
     setShowReviewForm(false);
     setReviewSubmitted(false);
-  }, [product, colorParam]);
+  }, [product]);
 
   const activeVariant =
     product.variants.find(
@@ -63,13 +59,6 @@ export function ProductPage() {
     });
   };
 
-  const activeColorObj = product.colors.find((c) => c.name.toLowerCase() === selectedColor.toLowerCase());
-  const activeShadeMatch = SHADE_SWATCHES.find((s) => s.code.toLowerCase() === selectedColor.toLowerCase());
-  const displayImages = activeColorObj?.swatchImage
-    ? [activeColorObj.swatchImage, ...product.images.filter((im) => im !== activeColorObj.swatchImage)]
-    : product.images;
-  const activeMainFilter = selectedImage === 0 && !activeColorObj?.swatchImage && activeShadeMatch?.filter ? activeShadeMatch.filter : undefined;
-
   const related = products
     .filter((p) => p.collection === product.collection && p.id !== product.id)
     .slice(0, 4);
@@ -81,14 +70,10 @@ export function ProductPage() {
           {/* Left Column: Main Image + Square Thumbnails */}
           <div>
             <div className="product-gallery__main">
-              <img
-                src={displayImages[selectedImage] || displayImages[0]}
-                alt={product.title}
-                style={{ filter: activeMainFilter }}
-              />
+              <img src={product.images[selectedImage] || product.images[0]} alt={product.title} />
             </div>
             <div className="product-gallery__thumbs">
-              {displayImages.map((img, idx) => (
+              {product.images.map((img, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -167,41 +152,34 @@ export function ProductPage() {
 
             {/* Color Swatches */}
             <div className="variant-group">
-              <span style={{ display: 'block', fontFamily: 'var(--typeHeaderPrimary)', fontSize: '14px', fontWeight: 600, marginBottom: '10px' }}>
-                {t.product.color} — {activeShadeMatch?.label || activeColorObj?.label || selectedColor}
+              <span style={{ display: 'block', fontFamily: 'var(--typeHeaderPrimary)', fontSize: '14px', fontWeight: 600, marginBottom: '8px' }}>
+                {t.product.color} — {selectedColor}
               </span>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 {product.colors.map((c) => {
-                  const active = selectedColor.toLowerCase() === c.name.toLowerCase();
-                  const shadeMatch = SHADE_SWATCHES.find((s) => s.code.toLowerCase() === c.name.toLowerCase());
+                  const active = selectedColor === c.name;
                   return (
                     <button
                       key={c.name}
                       type="button"
-                      onClick={() => {
-                        setSelectedColor(c.name);
-                        setSelectedImage(0);
-                      }}
-                      title={shadeMatch?.label || c.label}
-                      aria-label={shadeMatch?.label || c.label}
+                      onClick={() => setSelectedColor(c.name)}
+                      title={c.label}
+                      aria-label={c.label}
                       style={{
-                        width: '48px',
-                        height: '48px',
+                        width: '40px',
+                        height: '40px',
                         padding: '2px',
                         border: active ? '2px solid #000000' : '1px solid #d4d4d4',
                         background: '#ffffff',
                         cursor: 'pointer',
-                        overflow: 'hidden',
                       }}
                     >
-                      <img
-                        src={shadeMatch?.textureImage || '/shades/30-2.webp'}
-                        alt={shadeMatch?.label || c.label}
+                      <span
                         style={{
+                          display: 'block',
                           width: '100%',
                           height: '100%',
-                          objectFit: 'cover',
-                          filter: shadeMatch?.filter || undefined,
+                          background: `linear-gradient(135deg, ${c.hex} 0%, ${c.hex}dd 50%, ${c.hex} 100%)`,
                         }}
                       />
                     </button>
