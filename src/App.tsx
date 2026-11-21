@@ -10,6 +10,7 @@ import { SearchModal } from './components/SearchModal';
 import { CartProvider } from './context/CartContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { CartPage } from './pages/CartPage';
+import { CheckoutPage } from './pages/CheckoutPage';
 import { CollectionPage } from './pages/CollectionPage';
 import { HomePage } from './pages/HomePage';
 import {
@@ -65,6 +66,7 @@ export function App() {
           <Route path="/blogs/news" element={<NewsPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route
             path="/policies/shipping-policy"

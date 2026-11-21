@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2 } from 'lucide-react';
+import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
+import { isShopifyConfigured } from '../lib/shopify';
 
 export function CartPage() {
   const {
+    products,
     items,
     subtotal,
     discountCode,
@@ -18,13 +21,23 @@ export function CartPage() {
     removeFromCart,
     proceedToCheckout,
     checkoutLoading,
-    checkoutStatus,
   } = useCart();
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const [promoInput, setPromoInput] = useState('');
   const [promoMsg, setPromoMsg] = useState('');
   const remainingForFreeShipping = Math.max(0, 200 - subtotal);
+
+  const popularPicks = products.slice(0, 4);
+
+  const handleCheckout = async () => {
+    if (isShopifyConfigured()) {
+      await proceedToCheckout();
+    } else {
+      navigate('/checkout');
+    }
+  };
 
   const handlePromo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,11 +56,24 @@ export function CartPage() {
         </header>
 
         {items.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '48px 0' }}>
-            <p style={{ marginBottom: '24px' }}>{t.cart.empty}</p>
-            <Link to="/collections/all" className="btn">
-              {t.cart.shopExtensions}
-            </Link>
+          <div>
+            <div style={{ textAlign: 'center', padding: '24px 0 56px' }}>
+              <p style={{ marginBottom: '24px' }}>{t.cart.empty}</p>
+            </div>
+
+            <section style={{ borderTop: '1px solid #ededed', paddingTop: '48px' }}>
+              <div className="section-header">
+                <h2 className="section-header__title">Popular picks</h2>
+                <Link to="/collections/all" className="section-header__link">
+                  {t.home.viewAll}
+                </Link>
+              </div>
+              <div className="product-grid">
+                {popularPicks.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+            </section>
           </div>
         ) : (
           <div>
@@ -145,10 +171,7 @@ export function CartPage() {
                   <strong>${total.toFixed(2)}</strong>
                 </div>
                 <p style={{ fontSize: '12px', color: '#666666', marginBottom: '18px' }}>{t.cart.taxesNote}</p>
-                {checkoutStatus && (
-                  <p style={{ fontSize: '12px', background: '#f5f5f5', padding: '10px', marginBottom: '12px' }}>{checkoutStatus}</p>
-                )}
-                <button type="button" onClick={proceedToCheckout} disabled={checkoutLoading} className="btn btn--full">
+                <button type="button" onClick={handleCheckout} disabled={checkoutLoading} className="btn btn--full">
                   {checkoutLoading ? t.cart.connecting : t.cart.checkout}
                 </button>
               </div>

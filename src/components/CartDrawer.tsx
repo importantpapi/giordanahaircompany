@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
+import { isShopifyConfigured } from '../lib/shopify';
 
 export function CartDrawer() {
   const {
@@ -24,11 +25,21 @@ export function CartDrawer() {
     clearCheckoutStatus,
   } = useCart();
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const [promoInput, setPromoInput] = useState('');
   const [promoMsg, setPromoMsg] = useState('');
 
   if (!isCartOpen) return null;
+
+  const handleCheckout = async () => {
+    if (isShopifyConfigured()) {
+      await proceedToCheckout();
+    } else {
+      closeCart();
+      navigate('/checkout');
+    }
+  };
 
   const handlePromo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -226,7 +237,7 @@ export function CartDrawer() {
 
             <button
               type="button"
-              onClick={proceedToCheckout}
+              onClick={handleCheckout}
               disabled={checkoutLoading}
               className="btn btn--full"
               style={{ backgroundColor: '#ffffff', color: '#000000', borderColor: '#ffffff' }}
