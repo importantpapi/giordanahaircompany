@@ -33,7 +33,7 @@ export function CartDrawer() {
   const handlePromo = (e: React.FormEvent) => {
     e.preventDefault();
     const ok = applyDiscount(promoInput);
-    setPromoMsg(ok ? 'GIORDANA10 (-10%)' : 'GIORDANA10');
+    setPromoMsg(ok ? 'AIMEE10 (-10%)' : 'AIMEE10');
   };
 
   return (
@@ -145,7 +145,7 @@ export function CartDrawer() {
                     type="text"
                     value={promoInput}
                     onChange={(e) => setPromoInput(e.target.value)}
-                    placeholder="GIORDANA10"
+                    placeholder="AIMEE10"
                     style={{
                       flex: 1,
                       background: '#111111',

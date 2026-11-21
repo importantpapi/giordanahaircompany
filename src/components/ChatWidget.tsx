@@ -31,7 +31,7 @@ export function ChatWidget() {
         >
           <div style={{ background: '#000000', color: '#ffffff', padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
-              <strong style={{ display: 'block', fontSize: '14px' }}>Giordanahaircompany</strong>
+              <strong style={{ display: 'block', fontSize: '14px' }}>Aimeehaircompany</strong>
               <span style={{ fontSize: '11px', opacity: 0.8 }}>Online</span>
             </div>
             <button type="button" onClick={() => setOpen(false)} style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer' }} aria-label="Close chat">

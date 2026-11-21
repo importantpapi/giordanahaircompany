@@ -8,7 +8,7 @@ interface LanguageContextValue {
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
-const LANG_KEY = 'giordanahaircompany_lang_v1';
+const LANG_KEY = 'aimeehaircompany_lang_v1';
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {

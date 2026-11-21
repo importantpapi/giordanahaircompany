@@ -99,10 +99,10 @@ export function Header() {
                 <Link
                   to="/"
                   className="site-header__logo-link"
-                  aria-label="Giordanahaircompany Home"
+                  aria-label="Aimeehaircompany Home"
                 >
                   <div className="brand-monogram">
-                    <span className="brand-monogram__main">GIORDANA</span>
+                    <span className="brand-monogram__main">AIMEE</span>
                     <span className="brand-monogram__sub">Hair Company</span>
                   </div>
                 </Link>

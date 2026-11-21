@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-const POPUP_STORAGE_KEY = 'giordanahaircompany_popup_dismissed';
+const POPUP_STORAGE_KEY = 'aimeehaircompany_popup_dismissed';
 
 export function NewsletterPopup() {
   const { t } = useLanguage();

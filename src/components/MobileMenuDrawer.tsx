@@ -29,7 +29,7 @@ export function MobileMenuDrawer() {
       <aside className="drawer-panel drawer-panel--left" aria-label="Mobile navigation">
         <div className="drawer__header">
           <span className="brand-monogram__main" style={{ fontSize: '16px', color: '#ffffff' }}>
-            GIORDANAHAIRCOMPANY
+            AIMEEHAIRCOMPANY
           </span>
           <button
             type="button"

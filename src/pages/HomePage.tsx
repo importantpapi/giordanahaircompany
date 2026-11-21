@@ -39,7 +39,7 @@ export function HomePage() {
             muted
             playsInline
             autoPlay
-            aria-label="Giordanahaircompany luxury hair extensions showcase"
+            aria-label="Aimeehaircompany luxury hair extensions showcase"
           />
         </div>
         <div className="hero__text-wrap">
@@ -226,14 +226,14 @@ export function HomePage() {
             <h2 className="section-header__title">{t.home.igTitle}</h2>
             <p style={{ margin: '8px 0 0', fontSize: '14px', color: '#555555' }}>
               {t.home.igFollow}{' '}
-              <strong style={{ color: '#000000' }}>@giordanahaircompany</strong>
+              <strong style={{ color: '#000000' }}>@aimeehaircompany</strong>
             </p>
           </div>
 
           <div className="instagram-grid">
             {IG_IMAGES.map((src, idx) => (
               <Link key={idx} to="/pages/instagram" className="instagram-tile">
-                <img src={src} alt={`Giordanahaircompany look ${idx + 1}`} loading="lazy" />
+                <img src={src} alt={`Aimeehaircompany look ${idx + 1}`} loading="lazy" />
               </Link>
             ))}
           </div>

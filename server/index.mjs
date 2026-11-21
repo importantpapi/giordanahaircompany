@@ -38,7 +38,7 @@ app.use(express.json());
 app.get('/api/health', (_req, res) => {
   res.json({
     ok: true,
-    brand: 'Giordanahaircompany',
+    brand: 'Aimeehaircompany',
     shopifyConnected: Boolean(
       process.env.VITE_SHOPIFY_STORE_DOMAIN && process.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN
     ),
@@ -67,7 +67,7 @@ app.post('/api/reviews', (req, res) => {
     email: email || '',
     rating: Number(rating) || 5,
     date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
-    productTitle: productTitle || 'Giordanahaircompany Extensions',
+    productTitle: productTitle || 'Aimeehaircompany Extensions',
     title,
     body,
     verified: true,
@@ -129,7 +129,7 @@ app.post('/api/newsletter', (req, res) => {
     db.subscribers.push({ email, createdAt: new Date().toISOString() });
     writeDb(db);
   }
-  res.status(201).json({ ok: true, code: 'GIORDANA10' });
+  res.status(201).json({ ok: true, code: 'AIMEE10' });
 });
 
 // Orders (local checkout fallback before Shopify is connected)
@@ -139,7 +139,7 @@ app.post('/api/orders', (req, res) => {
     return res.status(400).json({ error: 'Cart is empty.' });
   }
   const db = readDb();
-  const orderNumber = `GHC-${1000 + db.orders.length + 1}`;
+  const orderNumber = `AHC-${1000 + db.orders.length + 1}`;
   const order = {
     orderNumber,
     items,
@@ -165,5 +165,5 @@ if (fs.existsSync(DIST_DIR)) {
 }
 
 app.listen(PORT, () => {
-  console.log(`Giordanahaircompany API server listening on http://localhost:${PORT}`);
+  console.log(`Aimeehaircompany API server listening on http://localhost:${PORT}`);
 });

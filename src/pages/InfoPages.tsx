@@ -230,7 +230,7 @@ export function ContactPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', fontSize: '14px', lineHeight: 1.8 }}>
             <div>
               <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Email us</h3>
-              <p style={{ margin: 0 }}>info@giordanahaircompany.com</p>
+              <p style={{ margin: 0 }}>info@aimeehaircompany.com</p>
             </div>
             <div>
               <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Call or text</h3>
@@ -239,7 +239,7 @@ export function ContactPage() {
             </div>
             <div>
               <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Mailing address</h3>
-              <p style={{ margin: 0 }}>Giordanahaircompany</p>
+              <p style={{ margin: 0 }}>Aimeehaircompany</p>
               <p style={{ margin: 0 }}>PO Box 3563, Los Angeles, CA 90078</p>
             </div>
           </div>
@@ -312,7 +312,7 @@ export function SalonPoliciesPage() {
       <div className="page-width--narrow">
         <h1 style={{ textAlign: 'center', marginBottom: '24px' }}>Salon Policies</h1>
         <p style={{ lineHeight: 1.85, marginBottom: '28px' }}>
-          We offer install services at Giordanahaircompany. If you would like to book your appointment please go{' '}
+          We offer install services at Aimeehaircompany. If you would like to book your appointment please go{' '}
           <Link to="/pages/services" style={{ textDecoration: 'underline' }}>here</Link>. To ensure you enjoy every aspect of your experience, we want to provide an open and transparent guide to what you can expect.
         </p>
 
@@ -356,7 +356,7 @@ export function ThanksPage() {
       <div className="page-width--narrow" style={{ textAlign: 'center', padding: '60px 20px' }}>
         <h1>Thanks for Joining!</h1>
         <p style={{ fontSize: '16px', margin: '18px 0 28px' }}>
-          Use the code <strong>GIORDANA10</strong> (or <strong>WELCOME10</strong>) to save 10% off your first order.
+          Use the code <strong>AIMEE10</strong> (or <strong>WELCOME10</strong>) to save 10% off your first order.
         </p>
         <Link to="/collections/all" className="btn">
           {t.home.shopNow}
@@ -374,7 +374,7 @@ export function NewsPage() {
       <div className="page-width">
         <header style={{ textAlign: 'center', marginBottom: '48px' }}>
           <h1>News</h1>
-          <p style={{ color: '#555555' }}>Latest updates and collections from Giordanahaircompany</p>
+          <p style={{ color: '#555555' }}>Latest updates and collections from Aimeehaircompany</p>
         </header>
 
         <section style={{ marginBottom: '56px' }}>
@@ -423,7 +423,7 @@ export function InstagramPage() {
         <header style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h1>{t.home.igTitle}</h1>
           <p style={{ color: '#555555' }}>
-            {t.home.igFollow} <strong>@giordanahaircompany</strong>
+            {t.home.igFollow} <strong>@aimeehaircompany</strong>
           </p>
         </header>
         <div className="instagram-grid">

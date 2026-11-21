@@ -89,7 +89,7 @@ export function App() {
                 body={[
                   'All sales are final policy: Please carefully review your order before confirming your purchase. All sales are considered final.',
                   'We do not offer refunds or exchanges.',
-                  'You can always contact us for any questions at info@giordanahaircompany.com.',
+                  'You can always contact us for any questions at info@aimeehaircompany.com.',
                 ]}
               />
             }
@@ -100,7 +100,7 @@ export function App() {
               <PolicyPage
                 title="Privacy Policy"
                 body={[
-                  'Giordanahaircompany respects your privacy and is committed to protecting your personal information.',
+                  'Aimeehaircompany respects your privacy and is committed to protecting your personal information.',
                   'Information collected during checkout or newsletter signup is used strictly to fulfill your orders and share brand updates.',
                 ]}
               />

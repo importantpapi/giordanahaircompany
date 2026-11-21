@@ -44,7 +44,7 @@ export function Footer() {
             <Link to="/" style={{ display: 'inline-block', marginBottom: '20px' }}>
               <div className="brand-monogram" style={{ alignItems: 'flex-start' }}>
                 <span className="brand-monogram__main" style={{ color: '#ffffff', fontSize: '22px' }}>
-                  GIORDANA
+                  AIMEE
                 </span>
                 <span className="brand-monogram__sub" style={{ color: '#ffffff' }}>
                   HAIR COMPANY

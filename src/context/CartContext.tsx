@@ -35,7 +35,7 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-const CART_STORAGE_KEY = 'giordanahaircompany_cart_v1';
+const CART_STORAGE_KEY = 'aimeehaircompany_cart_v1';
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [products, setProducts] = useState<Product[]>(PRODUCTS);
@@ -73,14 +73,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         }
       })
       .catch((err) => {
-        console.warn('Using local Giordanahaircompany catalog:', err);
+        console.warn('Using local Aimeehaircompany catalog:', err);
       });
   }, []);
 
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const discountRate =
-    discountCode.toUpperCase() === 'GIORDANA10' || discountCode.toUpperCase() === 'WELCOME10'
+    discountCode.toUpperCase() === 'AIMEE10' || discountCode.toUpperCase() === 'WELCOME10'
       ? 0.1
       : 0;
   const discountAmount = Math.round(subtotal * discountRate * 100) / 100;
@@ -88,7 +88,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const applyDiscount = (code: string) => {
     const clean = code.trim().toUpperCase();
-    if (clean === 'GIORDANA10' || clean === 'WELCOME10') {
+    if (clean === 'AIMEE10' || clean === 'WELCOME10') {
       setDiscountCode(clean);
       return true;
     }

@@ -855,7 +855,7 @@ export const REVIEWS: Review[] = [
     date: 'August 2026',
     productTitle: 'Hair Extensions - Natural Curly',
     title: 'Softest curls ever',
-    body: 'The curl pattern springs right back after co-washing and doesn’t get frizzy. Giordanahaircompany never misses!',
+    body: 'The curl pattern springs right back after co-washing and doesn’t get frizzy. Aimeehaircompany never misses!',
     verified: true,
   },
 ];
